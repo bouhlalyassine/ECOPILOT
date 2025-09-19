@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSE App – Tableau de bord</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">🌿</div>
+        <div class="brand-copy">
+          <p class="brand-overline">Tableau de bord</p>
+          <h1>Programme RSE</h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="exportButton" class="secondary">Exporter</button>
+        <button id="addActionButton" class="primary">Nouvelle action</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="insights" aria-labelledby="insights-title">
+        <div class="section-header">
+          <h2 id="insights-title">Aperçu des objectifs</h2>
+          <p>Une vue synthétique de l'avancement et de l'impact de la feuille de route RSE.</p>
+        </div>
+        <div class="insights-grid" id="insightsGrid"></div>
+      </section>
+
+      <section class="panels">
+        <article class="panel" aria-labelledby="timeline-title">
+          <div class="section-header">
+            <h2 id="timeline-title">Échéances à venir</h2>
+            <p>Les jalons prioritaires pour les prochaines semaines.</p>
+          </div>
+          <ol class="timeline" id="timeline"></ol>
+        </article>
+
+        <article class="panel" aria-labelledby="score-title">
+          <div class="section-header">
+            <h2 id="score-title">Indice d'engagement</h2>
+            <p>Une combinaison de la progression, de l'impact et de la mobilisation.</p>
+          </div>
+          <div class="engagement-score" id="engagementScore">
+            <div class="engagement-value"></div>
+            <p class="engagement-description"></p>
+            <div class="engagement-breakdown" id="engagementBreakdown"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="actions" aria-labelledby="actions-title">
+        <div class="section-header">
+          <div>
+            <h2 id="actions-title">Suivi des actions</h2>
+            <p>Filtrez et mettez à jour les initiatives en cours.</p>
+          </div>
+          <div class="filters">
+            <label>
+              Pilier
+              <select id="pillarFilter" aria-label="Filtrer par pilier">
+                <option value="all">Tous</option>
+                <option value="Environnement">Environnement</option>
+                <option value="Social">Social</option>
+                <option value="Gouvernance">Gouvernance</option>
+              </select>
+            </label>
+            <label>
+              Statut
+              <select id="statusFilter" aria-label="Filtrer par statut">
+                <option value="all">Tous</option>
+                <option value="Planifié">Planifié</option>
+                <option value="En cours">En cours</option>
+                <option value="Terminé">Terminé</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="actions-list" id="actionsList" role="list"></div>
+      </section>
+
+      <section class="new-action" aria-labelledby="new-action-title">
+        <div class="section-header">
+          <h2 id="new-action-title">Ajouter une action</h2>
+          <p>Décrivez rapidement la prochaine étape de votre feuille de route.</p>
+        </div>
+        <form id="actionForm" class="form">
+          <div class="form-grid">
+            <label>
+              Intitulé de l'action
+              <input type="text" id="actionTitle" name="actionTitle" required />
+            </label>
+            <label>
+              Pilier
+              <select id="actionPillar" name="actionPillar" required>
+                <option value="">Choisissez un pilier</option>
+                <option value="Environnement">Environnement</option>
+                <option value="Social">Social</option>
+                <option value="Gouvernance">Gouvernance</option>
+              </select>
+            </label>
+            <label>
+              Responsable
+              <input type="text" id="actionOwner" name="actionOwner" placeholder="Nom du pilote" required />
+            </label>
+            <label>
+              Échéance
+              <input type="date" id="actionDueDate" name="actionDueDate" required />
+            </label>
+            <label>
+              Impact (1-5)
+              <input type="number" id="actionImpact" name="actionImpact" min="1" max="5" value="3" required />
+            </label>
+            <label>
+              Type d'impact
+              <select id="actionImpactType" name="actionImpactType" required>
+                <option value="Emission">Réduction des émissions</option>
+                <option value="Bien-être">Bien-être collaborateurs</option>
+                <option value="Gouvernance">Gouvernance</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Description
+            <textarea id="actionDescription" name="actionDescription" rows="3" placeholder="Objectif et résultats attendus"></textarea>
+          </label>
+          <button type="submit" class="primary">Enregistrer l'action</button>
+        </form>
+      </section>
+    </main>
+
+    <dialog id="modal" aria-labelledby="modal-title" aria-modal="true">
+      <form method="dialog" class="modal">
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+        <div class="modal-actions">
+          <button value="cancel" class="secondary">Annuler</button>
+          <button value="confirm" class="primary">Confirmer</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="actionTemplate">
+      <article class="action-card" data-id="">
+        <div class="card-header">
+          <div>
+            <p class="action-pill"></p>
+            <h3 class="action-title"></h3>
+          </div>
+          <button class="ghost status-button"></button>
+        </div>
+        <p class="action-description"></p>
+        <dl class="action-meta">
+          <div>
+            <dt>Responsable</dt>
+            <dd class="action-owner"></dd>
+          </div>
+          <div>
+            <dt>Échéance</dt>
+            <dd class="action-due-date"></dd>
+          </div>
+          <div>
+            <dt>Impact</dt>
+            <dd class="action-impact"></dd>
+          </div>
+        </dl>
+        <div class="progress">
+          <label>
+            Avancement
+            <input type="range" min="0" max="100" class="progress-input" />
+          </label>
+          <div class="progress-bar">
+            <div class="progress-value"></div>
+          </div>
+          <span class="progress-label"></span>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
