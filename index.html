@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecopilot RSE - Prototype</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar__brand">
+          <span class="brand__icon">🌱</span>
+          <div class="brand__text">
+            <span class="brand__title">Ecopilot</span>
+            <span class="brand__subtitle">Plateforme RSE</span>
+          </div>
+        </div>
+        <div class="sidebar__welcome">
+          <span class="welcome__title">Bienvenue</span>
+          <span class="welcome__user">Utilisateur</span>
+        </div>
+        <nav class="sidebar__nav">
+          <button class="nav-item is-active" data-target="main-kpis">
+            <span class="nav-item__label">Main KPIs</span>
+            <span class="nav-item__hint">Synthèse globale</span>
+          </button>
+          <button class="nav-item" data-target="data-entry">
+            <span class="nav-item__label">Saisie de données</span>
+            <span class="nav-item__hint">Workflow & contrôles</span>
+          </button>
+          <button class="nav-item" data-target="energy">
+            <span class="nav-item__label">Gestion de l'énergie</span>
+            <span class="nav-item__hint">Consommations & sobriété</span>
+          </button>
+          <button class="nav-item" data-target="carbon">
+            <span class="nav-item__label">Gestion des émissions</span>
+            <span class="nav-item__hint">GHG Protocol, CSRD</span>
+          </button>
+          <button class="nav-item" data-target="waste">
+            <span class="nav-item__label">Gestion des déchets</span>
+            <span class="nav-item__hint">Tri & valorisation</span>
+          </button>
+          <button class="nav-item" data-target="social">
+            <span class="nav-item__label">Performance sociale</span>
+            <span class="nav-item__hint">Engagement & inclusion</span>
+          </button>
+          <button class="nav-item" data-target="reporting">
+            <span class="nav-item__label">Rapport RSE</span>
+            <span class="nav-item__hint">Exports & conformité</span>
+          </button>
+          <button class="nav-item" data-target="parameters">
+            <span class="nav-item__label">Paramètres</span>
+            <span class="nav-item__hint">Organisation & alertes</span>
+          </button>
+        </nav>
+        <div class="sidebar__footer">
+          <button class="logout-button" type="button">Déconnexion</button>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="content__header">
+          <div class="header__breadcrumbs">
+            <span class="breadcrumb__level">Accueil</span>
+            <span class="breadcrumb__divider">/</span>
+            <span class="breadcrumb__current">Main KPIs</span>
+          </div>
+          <div class="header__actions">
+            <div class="language-toggle" role="group" aria-label="Langues">
+              <button class="language-toggle__btn is-active" type="button">FR</button>
+              <button class="language-toggle__btn" type="button">EN</button>
+            </div>
+            <div class="user-indicator">
+              <span class="user-indicator__role">Admin</span>
+              <span class="user-indicator__status">Connecté</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="content-section is-active" id="main-kpis">
+          <header class="section__header">
+            <h1>Main KPIs</h1>
+            <p>
+              Vue synthétique des performances Environnement, Social et Gouvernance
+              (ESG) pour piloter l'amélioration continue et anticiper les tendances
+              réglementaires.
+            </p>
+          </header>
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <h2>Empreinte carbone</h2>
+              <p class="kpi-card__value">-8% vs N-1</p>
+              <p class="kpi-card__meta">Scopes 1-3</p>
+            </article>
+            <article class="kpi-card">
+              <h2>Consommation d'énergie</h2>
+              <p class="kpi-card__value">52 kWh / m²</p>
+              <p class="kpi-card__meta">Objectif sobriété atteint à 92%</p>
+            </article>
+            <article class="kpi-card">
+              <h2>Taux de valorisation des déchets</h2>
+              <p class="kpi-card__value">64%</p>
+              <p class="kpi-card__meta">+5 pts vs objectif</p>
+            </article>
+            <article class="kpi-card">
+              <h2>Indice social</h2>
+              <p class="kpi-card__value">78 / 100</p>
+              <p class="kpi-card__meta">Engagement & formation</p>
+            </article>
+          </div>
+          <div class="kpi-cta">
+            <div class="cta-card">
+              <span class="cta-card__icon">＋</span>
+              <span class="cta-card__text">Ajouter un KPI</span>
+            </div>
+            <div class="cta-card">
+              <span class="cta-card__icon">＋</span>
+              <span class="cta-card__text">Créer un graphique</span>
+            </div>
+            <div class="cta-card">
+              <span class="cta-card__icon">＋</span>
+              <span class="cta-card__text">Configurer un suivi SDG</span>
+            </div>
+          </div>
+          <div class="kpi-highlights">
+            <div class="highlight">
+              <h3>Alertes intelligentes</h3>
+              <p>Notifications proactives lorsqu'un indicateur dérive des seuils définis.</p>
+            </div>
+            <div class="highlight">
+              <h3>Benchmarks sectoriels</h3>
+              <p>Comparez vos performances aux moyennes sectorielles et meilleures pratiques.</p>
+            </div>
+            <div class="highlight">
+              <h3>Scénarios prospectifs</h3>
+              <p>Projetez-vous avec des simulations climat, énergie et conformité réglementaire.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="data-entry">
+          <header class="section__header">
+            <h1>Workflow de saisie des données</h1>
+            <p>
+              Un processus collaboratif et traçable pour centraliser les données RSE issues de
+              sources hétérogènes.
+            </p>
+          </header>
+          <div class="workflow">
+            <div class="workflow__column">
+              <h2>Saisie de données</h2>
+              <div class="workflow__step">
+                <h3>Agent de saisie</h3>
+                <p>Complète les formulaires normalisés (10 à 20 min / mois).</p>
+              </div>
+              <div class="workflow__step">
+                <h3>Super User</h3>
+                <p>Valide ou corrige les données et déclenche les contrôles automatiques.</p>
+              </div>
+              <div class="workflow__step">
+                <h3>Intégration</h3>
+                <p>Les données validées alimentent les tableaux de bord et rapports.</p>
+              </div>
+            </div>
+            <div class="workflow__column">
+              <h2>Connexion ERP & systèmes</h2>
+              <p>
+                Connectez vos ERP et bases de données existantes pour automatiser les imports,
+                assurer la traçabilité et limiter la double saisie.
+              </p>
+              <ul>
+                <li>Connecteurs prêts à l'emploi (SAP, Oracle, Sage).</li>
+                <li>API sécurisées & gestion des droits par rôle.</li>
+                <li>Imports Excel guidés pour les structures non connectées.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="energy">
+          <header class="section__header">
+            <h1>Module &mdash; Gestion de l'énergie</h1>
+            <p>
+              Suivez les consommations, identifiez les gisements d'économies et pilotez votre
+              plan de sobriété énergétique.
+            </p>
+          </header>
+          <div class="module-grid">
+            <article class="module-card">
+              <h2>Graphiques & indicateurs</h2>
+              <ul>
+                <li>Répartition des énergies (électricité, gaz, renouvelable).</li>
+                <li>Intensité énergétique par site & unité d'œuvre.</li>
+                <li>Suivi des actions d'efficacité et ROI associé.</li>
+              </ul>
+            </article>
+            <article class="module-card">
+              <h2>Filtres dynamiques</h2>
+              <ul>
+                <li>Sites, pays et typologies de bâtiments.</li>
+                <li>Périodes (mensuel, trimestriel, annuel).</li>
+                <li>Comparaison vs objectifs et trajectoire neutralité.</li>
+              </ul>
+            </article>
+            <article class="module-card module-card--chart">
+              <div class="chart-placeholder">
+                <span class="chart-placeholder__title">Consommation annuelle</span>
+                <div class="chart-placeholder__bars">
+                  <span style="height: 50%"></span>
+                  <span style="height: 70%"></span>
+                  <span style="height: 40%"></span>
+                  <span style="height: 65%"></span>
+                  <span style="height: 55%"></span>
+                </div>
+                <p>Objectif 2025 : -15% vs référence 2019</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section" id="carbon">
+          <header class="section__header">
+            <h1>Module &mdash; Gestion des émissions</h1>
+            <p>
+              Conformité aux standards GHG Protocol, CSRD et automatisation des calculs de
+              trajectoires carbone.
+            </p>
+          </header>
+          <div class="module-grid">
+            <article class="module-card">
+              <h2>Scopes couverts</h2>
+              <ul>
+                <li>Scope 1 & 2 : énergie, flotte, fuites.</li>
+                <li>Scope 3 : achats, déplacements, logistique.</li>
+                <li>Intégration des facteurs d'émissions certifiés.</li>
+              </ul>
+            </article>
+            <article class="module-card">
+              <h2>Automatisation</h2>
+              <ul>
+                <li>Imports normalisés & contrôles de cohérence.</li>
+                <li>Scénarios de neutralité & budgets carbone.</li>
+                <li>Exports réglementaires (CSRD, CDP, ADEME).</li>
+              </ul>
+            </article>
+            <article class="module-card module-card--chart">
+              <div class="chart-placeholder chart-placeholder--line">
+                <span class="chart-placeholder__title">Trajectoire carbone</span>
+                <svg viewBox="0 0 200 120" aria-hidden="true">
+                  <polyline
+                    points="0,100 40,90 80,80 120,60 160,45 200,35"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                  ></polyline>
+                </svg>
+                <p>Gap to target : -12%</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section" id="waste">
+          <header class="section__header">
+            <h1>Module &mdash; Gestion des déchets</h1>
+            <p>
+              Optimisez vos flux, augmentez la valorisation matière et assurez la conformité
+              réglementaire locale.
+            </p>
+          </header>
+          <div class="module-grid">
+            <article class="module-card">
+              <h2>Indicateurs clés</h2>
+              <ul>
+                <li>Taux de recyclage & valorisation énergétique.</li>
+                <li>Coûts de traitement vs budget.</li>
+                <li>Alertes seuils pour déchets dangereux.</li>
+              </ul>
+            </article>
+            <article class="module-card">
+              <h2>Suivi opérationnel</h2>
+              <ul>
+                <li>Plan d'actions par site & prestataire.</li>
+                <li>Contrats & reporting réglementaire.</li>
+                <li>Analyse des gisements et opportunités.</li>
+              </ul>
+            </article>
+            <article class="module-card module-card--chart">
+              <div class="chart-placeholder chart-placeholder--donut">
+                <span class="chart-placeholder__title">Valorisation par flux</span>
+                <div class="donut">
+                  <div class="donut__hole">64%</div>
+                </div>
+                <p>Objectif annuel : 60%</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section" id="social">
+          <header class="section__header">
+            <h1>Module &mdash; Performance sociale & sociétale</h1>
+            <p>
+              Mesurez l'impact social de vos initiatives et renforcez la démarche RSE auprès des
+              collaborateurs.
+            </p>
+          </header>
+          <div class="module-grid">
+            <article class="module-card">
+              <h2>Axes de suivi</h2>
+              <ul>
+                <li>Engagement & climat social.</li>
+                <li>Diversité, inclusion & égalité professionnelle.</li>
+                <li>Programmes de formation & mécénat.</li>
+              </ul>
+            </article>
+            <article class="module-card">
+              <h2>Fonctionnalités</h2>
+              <ul>
+                <li>Enquêtes pulse & baromètres.</li>
+                <li>Plans d'actions avec responsables dédiés.</li>
+                <li>Tableaux de bord multi-sites.</li>
+              </ul>
+            </article>
+            <article class="module-card module-card--chart">
+              <div class="chart-placeholder chart-placeholder--radar">
+                <span class="chart-placeholder__title">Radar ESG</span>
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <polygon
+                    points="60,10 105,40 90,110 30,110 15,40"
+                    fill="rgba(86, 149, 255, 0.25)"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  ></polygon>
+                </svg>
+                <p>Comp & Bien-être en progression.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section" id="reporting">
+          <header class="section__header">
+            <h1>Rapport RSE & exports</h1>
+            <p>
+              Préparez vos rapports réglementaires et communication extra-financière en quelques
+              clics.
+            </p>
+          </header>
+          <div class="reporting-grid">
+            <article class="reporting-card">
+              <h2>Modèles standards</h2>
+              <ul>
+                <li>GHG Protocol, CSRD, DPEF, Taxonomie UE.</li>
+                <li>Mise en page automatisée & branding.</li>
+                <li>Exports PDF, PowerPoint et Excel.</li>
+              </ul>
+            </article>
+            <article class="reporting-card">
+              <h2>Collaboration</h2>
+              <ul>
+                <li>Versionning & historique des validations.</li>
+                <li>Commentaires contextualisés.</li>
+                <li>Workflow multi-acteurs (audit, direction).</li>
+              </ul>
+            </article>
+            <article class="reporting-card">
+              <h2>Capitalisation</h2>
+              <ul>
+                <li>Bibliothèque de KPIs & best practices.</li>
+                <li>Comparaisons temporelles & sectorielles.</li>
+                <li>Suivi des engagements ODD/SDG.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section" id="parameters">
+          <header class="section__header">
+            <h1>Paramètres de la plateforme</h1>
+            <p>
+              Configurez votre organisation, gérez les accès et personnalisez les alertes pour
+              chaque module.
+            </p>
+          </header>
+          <div class="parameters-grid">
+            <article class="parameter-card">
+              <h2>Profil</h2>
+              <p>Mettez à jour vos informations et préférences de notification.</p>
+            </article>
+            <article class="parameter-card">
+              <h2>Organisation</h2>
+              <p>Structurez les entités, sites et équipes pour refléter votre réalité.</p>
+            </article>
+            <article class="parameter-card">
+              <h2>Abonnement</h2>
+              <p>Suivez votre plan, consommez vos crédits de modules et gérez la facturation.</p>
+            </article>
+            <article class="parameter-card">
+              <h2>Notifications</h2>
+              <p>Définissez des alertes personnalisées par seuil, périodicité ou module.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
