@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecopilot – Prototype RSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="light">
+    <div class="app" id="app-root">
+      <aside class="sidebar" id="app-sidebar">
+        <div class="sidebar__top">
+          <div class="sidebar__brand">
+            <span class="sidebar__logo" aria-hidden="true">🌱</span>
+            <div class="sidebar__brand-text">
+              <span class="sidebar__brand-title" data-i18n="brand.title">Ecopilot</span>
+              <span class="sidebar__brand-subtitle" data-i18n="brand.subtitle">Pilotage ESG</span>
+            </div>
+          </div>
+          <button
+            class="sidebar__collapse"
+            type="button"
+            data-action="collapse-sidebar"
+            aria-expanded="true"
+          >
+            <span class="sidebar__collapse-icon" aria-hidden="true">⮜</span>
+            <span class="sidebar__collapse-label" data-i18n="actions.sidebar.collapse">Replier le menu</span>
+          </button>
+        </div>
+        <div class="sidebar__welcome">
+          <span class="sidebar__welcome-title" data-i18n="welcome.title">Bienvenue</span>
+          <span class="sidebar__welcome-user" data-i18n="welcome.user">Utilisateur</span>
+        </div>
+        <nav class="sidebar__menu" aria-label="Navigation principale">
+          <div class="sidebar__group">
+            <p class="sidebar__heading" data-i18n="nav.sections.overview">Vue générale</p>
+            <button class="nav-item is-active" type="button" data-target="dashboard">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.overview.label">Main KPIs</span>
+            </button>
+          </div>
+          <div class="sidebar__group">
+            <p class="sidebar__heading" data-i18n="nav.sections.database">Base de données</p>
+            <button class="nav-item" type="button" data-target="data-entry">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.dataEntry.label">Saisie de données</span>
+            </button>
+            <button class="nav-item" type="button" data-target="filters">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.filters.label">Filtres &amp; vues</span>
+            </button>
+            <button class="nav-item" type="button" data-target="activity">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.activity.label">Activité &amp; suivi</span>
+            </button>
+          </div>
+          <div class="sidebar__group">
+            <p class="sidebar__heading" data-i18n="nav.sections.modules">Modules d’analyse</p>
+            <button class="nav-item" type="button" data-target="carbon">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.carbon.label">Empreinte carbone</span>
+            </button>
+            <button class="nav-item" type="button" data-target="energy">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.energy.label">Gestion de l’énergie</span>
+            </button>
+            <button class="nav-item" type="button" data-target="social">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.social.label">Social &amp; sociétal</span>
+            </button>
+            <button class="nav-item" type="button" data-target="governance">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.governance.label">Gouvernance</span>
+            </button>
+          </div>
+          <div class="sidebar__group">
+            <p class="sidebar__heading" data-i18n="nav.sections.reporting">Reporting</p>
+            <button class="nav-item" type="button" data-target="annual-report">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.annual.label">Rapport annuel RSE</span>
+            </button>
+            <button class="nav-item" type="button" data-target="performance-report">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.performance.label">Rapport de performance</span>
+            </button>
+          </div>
+          <div class="sidebar__group">
+            <p class="sidebar__heading" data-i18n="nav.sections.parameters">Paramètres</p>
+            <button class="nav-item" type="button" data-target="parameters">
+              <span class="nav-item__bullet" aria-hidden="true">●</span>
+              <span class="nav-item__label" data-i18n="nav.parameters.label">Administration</span>
+            </button>
+          </div>
+        </nav>
+        <footer class="sidebar__footer">
+          <button class="logout-button" type="button">
+            <span class="logout-button__icon" aria-hidden="true">⇦</span>
+            <span class="logout-button__label" data-i18n="buttons.logout">Déconnexion</span>
+          </button>
+        </footer>
+      </aside>
+      <main class="main" id="app-main">
+        <header class="topbar">
+          <div class="topbar__breadcrumbs">
+            <span class="breadcrumb" data-i18n="breadcrumbs.home">Accueil</span>
+            <span class="breadcrumb__divider" aria-hidden="true">/</span>
+            <span class="breadcrumb breadcrumb--current" data-role="current-section">Main KPIs</span>
+          </div>
+          <div class="topbar__actions">
+            <div class="language-switch" role="group" aria-label="Choix de la langue">
+              <button class="language-switch__btn is-active" type="button" data-lang="fr" aria-pressed="true">FR</button>
+              <button class="language-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+            </div>
+            <button class="theme-switch" type="button" data-action="toggle-theme" aria-pressed="false">
+              <span class="theme-switch__icon" aria-hidden="true">🌙</span>
+              <span class="theme-switch__label" data-i18n="actions.theme.dark">Mode sombre</span>
+            </button>
+            <div class="user-badge" role="status">
+              <span class="user-badge__role" data-i18n="user.role">Admin</span>
+              <span class="user-badge__status" data-i18n="user.status">Connecté</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="view is-active" id="dashboard">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.dashboard.title">
+              Main KPIs, graphiques &amp; indicateurs
+            </h1>
+            <p class="view__intro" data-i18n="sections.dashboard.intro">
+              Une page d’accueil pensée pour donner immédiatement la tendance ESG, accéder aux modules clés et guider l’utilisateur vers les actions prioritaires.
+            </p>
+          </header>
+          <div class="overview-grid">
+            <article class="overview-column">
+              <h2 class="overview-column__title" data-i18n="sections.dashboard.parameters.title">Paramètres</h2>
+              <p class="overview-column__note" data-i18n="sections.dashboard.parameters.note">Administration globale par l’organisation cliente.</p>
+              <ul class="overview-list">
+                <li data-i18n="sections.dashboard.parameters.items.profile">Profil</li>
+                <li data-i18n="sections.dashboard.parameters.items.organization">Organisation</li>
+                <li data-i18n="sections.dashboard.parameters.items.subscription">Abonnement</li>
+                <li data-i18n="sections.dashboard.parameters.items.notifications">Notifications</li>
+                <li data-i18n="sections.dashboard.parameters.items.objectives">Objectifs</li>
+              </ul>
+            </article>
+            <article class="overview-column">
+              <h2 class="overview-column__title" data-i18n="sections.dashboard.modules.title">Modules</h2>
+              <p class="overview-column__note" data-i18n="sections.dashboard.modules.note">Accès direct aux flux métiers.</p>
+              <ul class="overview-list">
+                <li data-i18n="sections.dashboard.modules.items.energy">Gestion de l’énergie</li>
+                <li data-i18n="sections.dashboard.modules.items.carbon">Empreinte carbone</li>
+                <li data-i18n="sections.dashboard.modules.items.social">Sociale &amp; sociétale</li>
+                <li data-i18n="sections.dashboard.modules.items.governance">Gouvernance &amp; risques</li>
+              </ul>
+            </article>
+            <article class="overview-column">
+              <h2 class="overview-column__title" data-i18n="sections.dashboard.alignment.title">Alignement RSE</h2>
+              <p class="overview-column__note" data-i18n="sections.dashboard.alignment.note">Suivi du niveau de couverture des référentiels.</p>
+              <ul class="overview-list overview-list--tags">
+                <li data-i18n="sections.dashboard.alignment.items.gri">GRI</li>
+                <li data-i18n="sections.dashboard.alignment.items.odds">ODD</li>
+                <li data-i18n="sections.dashboard.alignment.items.csrd">CSRD</li>
+                <li data-i18n="sections.dashboard.alignment.items.iso">ISO 26000</li>
+              </ul>
+            </article>
+            <article class="overview-column">
+              <h2 class="overview-column__title" data-i18n="sections.dashboard.main.title">Main KPIs</h2>
+              <p class="overview-column__note" data-i18n="sections.dashboard.main.note">Sélection personnalisée par rôle.</p>
+              <ul class="overview-list">
+                <li data-i18n="sections.dashboard.main.items.primary">Indicateurs prioritaires</li>
+                <li data-i18n="sections.dashboard.main.items.secondary">Graphiques dynamiques</li>
+                <li data-i18n="sections.dashboard.main.items.custom">Widgets personnalisés</li>
+              </ul>
+              <div class="plus-grid">
+                <div class="plus-card">
+                  <span aria-hidden="true">＋</span>
+                  <span data-i18n="sections.dashboard.main.placeholder">Ajouter un module de visualisation</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.dashboard.note">
+            NB : les sous-modules s’affichent automatiquement selon les droits et modules activés.
+          </p>
+        </section>
+
+        <section class="view" id="data-entry">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.dataEntry.title">Saisie de données</h1>
+            <p class="view__intro" data-i18n="sections.dataEntry.intro">
+              Workflow collaboratif depuis la collecte terrain jusqu’à la consolidation groupe.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.dataEntry.steps.title">Étapes clés</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.dataEntry.steps.items.collect">Collecte : formulaires normalisés, imports Excel assistés.</li>
+                <li data-i18n="sections.dataEntry.steps.items.validate">Validation : contrôles automatiques et revue du Super User.</li>
+                <li data-i18n="sections.dataEntry.steps.items.approve">Approbation : verrouillage, horodatage et envoi vers les indicateurs.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.dataEntry.controls.title">Contrôles &amp; traçabilité</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.dataEntry.controls.items.traceability">Historique complet des contributions par rôle.</li>
+                <li data-i18n="sections.dataEntry.controls.items.version">Versionning des campagnes mensuelles / trimestrielles.</li>
+                <li data-i18n="sections.dataEntry.controls.items.audit">Journal d’audit exportable pour les commissaires.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.dataEntry.integrations.title">Intégrations</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.dataEntry.integrations.items.internal">Connexion aux ERP internes (SAP, Oracle, Sage…).</li>
+                <li data-i18n="sections.dataEntry.integrations.items.external">Imports ponctuels depuis bases externes ou prestataires.</li>
+                <li data-i18n="sections.dataEntry.integrations.items.apis">API sécurisée pour industrialiser les synchronisations.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="callout" role="note" data-i18n="sections.dataEntry.callout">
+            Un modèle de langage embarqué propose des recommandations qualité et suggère des valeurs lorsqu’une donnée manque.
+          </div>
+        </section>
+
+        <section class="view" id="filters">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.filters.title">Filtres &amp; vues</h1>
+            <p class="view__intro" data-i18n="sections.filters.intro">
+              Affinez l’analyse en croisant les périmètres métiers, temporels et géographiques.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.filters.matrix.title">Axes de filtrage</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.filters.matrix.items.period">Période : mois, trimestre, année, multi-années.</li>
+                <li data-i18n="sections.filters.matrix.items.scope">Périmètre : groupe, BU, site, fournisseur.</li>
+                <li data-i18n="sections.filters.matrix.items.activity">Activité : processus, projets, portefeuille d’initiatives.</li>
+                <li data-i18n="sections.filters.matrix.items.impact">Impact : environnemental, social, gouvernance.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.filters.usage.title">Cas d’usage</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.filters.usage.items.snapshots">Créer des vues instantanées pour les comités.</li>
+                <li data-i18n="sections.filters.usage.items.comparisons">Comparer N vs N-1 ou objectif vs réalisé.</li>
+                <li data-i18n="sections.filters.usage.items.alerts">Sauvegarder un filtre et recevoir une alerte en cas d’écart.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.filters.note">
+            Les filtres peuvent être sauvegardés, partagés ou utilisés pour générer automatiquement un rapport.
+          </p>
+        </section>
+
+        <section class="view" id="activity">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.activity.title">Activité &amp; suivi</h1>
+            <p class="view__intro" data-i18n="sections.activity.intro">
+              Pilotage quotidien des actions et notifications issues des modules.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.activity.timeline.title">Journal d’activité</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.activity.timeline.items.tasks">Tâches assignées par module et niveau de priorité.</li>
+                <li data-i18n="sections.activity.timeline.items.changelog">Historique des modifications avec commentaires.</li>
+                <li data-i18n="sections.activity.timeline.items.comments">Fil de discussion entre contributeurs et managers.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.activity.security.title">Gouvernance</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.activity.security.items.roles">Droits différenciés : Admin, Super User, Agent de saisie.</li>
+                <li data-i18n="sections.activity.security.items.approvals">Workflow d’approbation configurable par module.</li>
+                <li data-i18n="sections.activity.security.items.archives">Archivage automatique des campagnes terminées.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="callout" role="note" data-i18n="sections.activity.callout">
+            Un tableau de bord de notifications consolide les alertes critiques pour garder la maîtrise des délais.
+          </div>
+        </section>
+
+        <section class="view" id="carbon">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.carbon.title">Empreinte carbone</h1>
+            <p class="view__intro" data-i18n="sections.carbon.intro">
+              Piloter les émissions sur les scopes 1, 2 et 3 avec une vision budgétaire.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.carbon.focus.title">Périmètre &amp; facteurs</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.carbon.focus.items.scopes">Calcul automatisé des scopes 1, 2 et 3 avec facteurs certifiés.</li>
+                <li data-i18n="sections.carbon.focus.items.factors">Mise à jour des facteurs ADEME, DEFRA, IEA et facteurs maison.</li>
+                <li data-i18n="sections.carbon.focus.items.trajectory">Construction de trajectoires SBTi et budgets carbone par BU.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.carbon.outputs.title">Restitution</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.carbon.outputs.items.reporting">Exports conformes CSRD, CDP, BEGES, label bas carbone.</li>
+                <li data-i18n="sections.carbon.outputs.items.alerts">Alertes sur dérives d’intensité ou ruptures de données.</li>
+                <li data-i18n="sections.carbon.outputs.items.actions">Plan d’actions bas carbone avec suivi ROI &amp; co-bénéfices.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.carbon.note">
+            Intégration possible avec des capteurs IoT et plateformes fournisseurs pour enrichir le scope 3.
+          </p>
+        </section>
+
+        <section class="view" id="energy">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.energy.title">Gestion de l’énergie</h1>
+            <p class="view__intro" data-i18n="sections.energy.intro">
+              Suivre les consommations, mesurer l’intensité énergétique et piloter la sobriété.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.energy.monitoring.title">Suivi</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.energy.monitoring.items.consumption">Consolidation multi-énergies et visualisation des pics.</li>
+                <li data-i18n="sections.energy.monitoring.items.intensity">Indicateurs d’intensité par m², unité produite ou site.</li>
+                <li data-i18n="sections.energy.monitoring.items.investments">Suivi des investissements efficacité et de leur ROI.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.energy.optimisation.title">Optimisation</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.energy.optimisation.items.plan">Plan de sobriété avec jalons et responsables.</li>
+                <li data-i18n="sections.energy.optimisation.items.projects">Portefeuille de projets (ISO 50001, CEE, relamping…).</li>
+                <li data-i18n="sections.energy.optimisation.items.budget">Pilotage budgétaire : CAPEX, OPEX, certificats d’économie.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.energy.note">
+            Des connecteurs télérelève permettent d’automatiser la collecte en quasi temps réel.
+          </p>
+        </section>
+
+        <section class="view" id="social">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.social.title">Social &amp; sociétal</h1>
+            <p class="view__intro" data-i18n="sections.social.intro">
+              Mesurer l’engagement des collaborateurs et l’impact des actions sociétales.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.social.indicators.title">Indicateurs</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.social.indicators.items.engagement">Indice d’engagement, absentéisme, eNPS.</li>
+                <li data-i18n="sections.social.indicators.items.diversity">Diversité, égalité professionnelle, inclusion.</li>
+                <li data-i18n="sections.social.indicators.items.csr">Solidarité, achats responsables, mécénat.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.social.programs.title">Programmes</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.social.programs.items.surveys">Campagnes d’écoute &amp; questionnaires anonymisés.</li>
+                <li data-i18n="sections.social.programs.items.training">Plans de formation, certifications, montée en compétences.</li>
+                <li data-i18n="sections.social.programs.items.community">Suivi des initiatives locales et des partenaires associatifs.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.social.note">
+            Des tableaux de bord thématiques facilitent la communication interne et externe.
+          </p>
+        </section>
+
+        <section class="view" id="governance">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.governance.title">Gouvernance</h1>
+            <p class="view__intro" data-i18n="sections.governance.intro">
+              Structurer les responsabilités, les risques et la conformité ESG.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.governance.pillars.title">Piliers</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.governance.pillars.items.compliance">Cartographie conformité (éthique, anti-corruption, RGPD).</li>
+                <li data-i18n="sections.governance.pillars.items.risk">Registre des risques ESG avec plans de mitigation.</li>
+                <li data-i18n="sections.governance.pillars.items.ethics">Suivi des codes de conduite, lanceurs d’alerte, audits.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.governance.data.title">Données &amp; process</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.governance.data.items.references">Référentiels associés : ISO 26000, LUCIE, Ecovadis.</li>
+                <li data-i18n="sections.governance.data.items.workflow">Workflow de validation croisé avec les comités.</li>
+                <li data-i18n="sections.governance.data.items.export">Exports automatiques pour le conseil d’administration.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.governance.note">
+            La gouvernance centralise aussi les politiques ESG et la documentation réglementaire.
+          </p>
+        </section>
+
+        <section class="view" id="annual-report">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.annual.title">Rapport annuel RSE</h1>
+            <p class="view__intro" data-i18n="sections.annual.intro">
+              Génération automatique de rapports extra-financiers personnalisés.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.annual.steps.title">Pour générer un rapport</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.annual.steps.items.framework">Choisir le référentiel (GRI, CSRD, ODD, etc.).</li>
+                <li data-i18n="sections.annual.steps.items.period">Sélectionner la période (mois/année à mois/année).</li>
+                <li data-i18n="sections.annual.steps.items.validation">Valider les sections et commentaires narratifs.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.annual.deliverables.title">Livrables</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.annual.deliverables.items.pdf">Exports adaptatifs PDF et Word prêts à diffusion.</li>
+                <li data-i18n="sections.annual.deliverables.items.templates">Templates conformes aux référentiels choisis.</li>
+                <li data-i18n="sections.annual.deliverables.items.automation">Automatisation de la pré-remplissage avec données validées.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.annual.note">
+            Un module de langage propose plusieurs exemples de rapports pour inspirer la rédaction.
+          </p>
+        </section>
+
+        <section class="view" id="performance-report">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.performance.title">Rapport de performance</h1>
+            <p class="view__intro" data-i18n="sections.performance.intro">
+              Tableaux comparatifs et analyses rapides pour suivre les résultats.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.performance.steps.title">Configuration</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.performance.steps.items.filters">Choisir les filtres et indicateurs à comparer.</li>
+                <li data-i18n="sections.performance.steps.items.period">Définir la période de couverture (mois/année).</li>
+                <li data-i18n="sections.performance.steps.items.share">Partager le rapport ou programmer l’envoi automatique.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.performance.outputs.title">Sorties</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.performance.outputs.items.comparative">Tableaux comparatifs N vs N-1 ou objectif.</li>
+                <li data-i18n="sections.performance.outputs.items.scorecards">Scorecards par BU avec statut couleur.</li>
+                <li data-i18n="sections.performance.outputs.items.notifications">Notifications lors d’écarts majeurs sur un indicateur.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="view__note" data-i18n="sections.performance.note">
+            Export disponible en PDF, Excel et connecteur Power BI.
+          </p>
+        </section>
+
+        <section class="view" id="parameters">
+          <header class="view__header">
+            <h1 class="view__title" data-role="section-title" data-i18n="sections.parameters.title">Administration</h1>
+            <p class="view__intro" data-i18n="sections.parameters.intro">
+              Gestion des paramètres globaux et des accès utilisateurs.
+            </p>
+          </header>
+          <div class="card-grid">
+            <article class="info-card">
+              <h2 data-i18n="sections.parameters.org.title">Organisation</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.parameters.org.items.structure">Structure : entités, BU, sites, équipes.</li>
+                <li data-i18n="sections.parameters.org.items.entitlements">Droits : rôles, scopes, délégations temporaires.</li>
+                <li data-i18n="sections.parameters.org.items.localization">Localisation : devise, fuseaux, langues.</li>
+              </ul>
+            </article>
+            <article class="info-card">
+              <h2 data-i18n="sections.parameters.targets.title">Objectifs &amp; alertes</h2>
+              <ul class="info-list">
+                <li data-i18n="sections.parameters.targets.items.strategy">Alignement stratégique avec les objectifs groupe.</li>
+                <li data-i18n="sections.parameters.targets.items.kpi">Objectifs par indicateur et trajectoires associées.</li>
+                <li data-i18n="sections.parameters.targets.items.alerts">Seuils d’alerte et canaux de notification.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="callout" role="note" data-i18n="sections.parameters.callout">
+            Les administrateurs peuvent simuler l’activation de nouveaux modules avant déploiement.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
