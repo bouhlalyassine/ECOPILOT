@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoPilot • Tableau de bord RSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="light" data-language="fr">
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Navigation principale">
+        <div class="sidebar-top">
+          <button
+            class="icon-button"
+            id="sidebarToggle"
+            type="button"
+            aria-label="Réduire la barre latérale"
+          >
+            <span class="icon">☰</span>
+          </button>
+          <div class="brand">
+            <span class="brand-mark">eco</span>
+            <span class="brand-name">EcoPilot</span>
+          </div>
+        </div>
+        <div class="sidebar-quick-actions">
+          <button class="pill-button" id="themeToggle" type="button">
+            <span class="icon" aria-hidden="true">🌙</span>
+            <span class="label" data-i18n="themeDark">Mode sombre</span>
+          </button>
+          <button class="pill-button ghost" id="languageToggle" type="button">
+            <span class="icon" aria-hidden="true">🇫🇷</span>
+            <span class="label">FR</span>
+          </button>
+        </div>
+        <section class="sidebar-section user-block">
+          <h2 class="section-title" data-i18n="welcomeTitle">Bienvenue</h2>
+          <p class="section-subtitle" data-i18n="welcomeSubtitle">
+            Accédez à vos modules RSE en un clin d'œil.
+          </p>
+          <div class="user-card">
+            <div class="user-avatar" aria-hidden="true">YB</div>
+            <div class="user-info">
+              <p class="user-name">Yassine Bouhlal</p>
+              <p class="user-role" data-i18n="userRole">Responsable RSE</p>
+            </div>
+          </div>
+        </section>
+        <section class="sidebar-section">
+          <h2 class="section-title" data-i18n="modulesTitle">Modules</h2>
+          <nav class="module-list" id="moduleList"></nav>
+        </section>
+        <section class="sidebar-section">
+          <button class="pill-button ghost full" id="logoutButton" type="button">
+            <span class="icon" aria-hidden="true">⎋</span>
+            <span data-i18n="logout">Déconnexion</span>
+          </button>
+        </section>
+      </aside>
+      <div class="sidebar-backdrop" id="sidebarBackdrop" tabindex="-1"></div>
+      <main class="main-content" id="mainContent">
+        <header class="content-header">
+          <div class="header-left">
+            <button
+              class="icon-button mobile-toggle"
+              id="mobileSidebarToggle"
+              type="button"
+              aria-label="Ouvrir le menu"
+            >
+              <span class="icon">☰</span>
+            </button>
+            <div class="header-texts">
+              <p class="breadcrumb" id="contentBreadcrumb">Pilotage · Module</p>
+              <h1 class="content-title" id="contentTitle">Saisie de données</h1>
+              <p class="module-description" id="contentDescription">
+                Centralisez la collecte de données extra-financières via un workflow guidé.
+              </p>
+            </div>
+          </div>
+          <div class="header-right">
+            <p class="greeting" id="contentGreeting">
+              Bienvenue Yassine Bouhlal, voici votre synthèse ESG.
+            </p>
+            <span class="update-badge" id="contentUpdate">Dernière mise à jour : —</span>
+          </div>
+        </header>
+        <section class="content-section" aria-labelledby="submodulesTitle">
+          <div class="section-header">
+            <h2 class="section-title" id="submodulesTitle" data-i18n="submodulesTitle">
+              Sous-modules clés
+            </h2>
+          </div>
+          <div class="submodule-grid" id="submoduleGrid"></div>
+        </section>
+        <section class="content-section" aria-labelledby="highlightTitle">
+          <div class="section-header">
+            <h2 class="section-title" id="highlightTitle" data-i18n="highlightTitle">
+              Actions principales
+            </h2>
+          </div>
+          <ul class="highlight-list" id="highlightList"></ul>
+        </section>
+        <section class="content-section" aria-labelledby="kpiTitle">
+          <div class="section-header with-action">
+            <h2 class="section-title" id="kpiTitle" data-i18n="kpiTitle">KPIs en direct</h2>
+            <button class="pill-button ghost" id="refreshButton" type="button">
+              <span class="icon" aria-hidden="true">⟳</span>
+              <span class="label" data-i18n="refresh">Actualiser</span>
+            </button>
+          </div>
+          <div class="kpi-grid" id="kpiGrid"></div>
+        </section>
+      </main>
+    </div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
