@@ -1,0 +1,15 @@
+{
+  "appName": "Ecopilot",
+  "welcome": "Bienvenue sur Ecopilot",
+  "mainKpis": "KPIs principaux",
+  "dataEntry": "Saisie de données",
+  "modules": "Modules",
+  "rseReport": "Rapport RSE",
+  "settings": "Paramètres",
+  "logout": "Déconnexion",
+  "language": "Langue",
+  "darkMode": "Mode sombre",
+  "campaign": "Campagne",
+  "baseline": "Baseline",
+  "simulated": "Simulé"
+}
