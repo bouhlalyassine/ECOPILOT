@@ -13,3 +13,14 @@ Exigences
 
 Bon pilotage RSE avec Ecopilot !
 
+## Prototype d'interface
+
+Une première version statique de l'application est disponible pour prévisualisation rapide.
+
+- Ouvrir directement le fichier `index.html` dans un navigateur moderne pour explorer le prototype.
+- La barre latérale est rétractable (icône ☰) et propose les modules décrits dans les maquettes.
+- Les modules disponibles : Saisie de données, Filtres (BU / Activité / Filiale / Société / Site), Indicateurs ESG, Bilan carbone, Alignement référentiel, Gestion énergie, Rapports RSE et Paramètres.
+- Les bascules thème clair/sombre et langue FR/EN se trouvent dans la barre latérale.
+- Les sous-modules apparaissent au survol de chaque module et sont également listés dans la zone de contenu.
+- Le design est responsive afin de s'adapter aux écrans desktop et mobiles.
+
