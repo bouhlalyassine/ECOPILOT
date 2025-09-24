@@ -23,4 +23,3 @@ Une première version statique de l'application est disponible pour prévisualis
 - Les bascules thème clair/sombre et langue FR/EN se trouvent dans la barre latérale.
 - Les sous-modules apparaissent au survol de chaque module et sont également listés dans la zone de contenu.
 - Le design est responsive afin de s'adapter aux écrans desktop et mobiles.
-
